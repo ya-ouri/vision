@@ -1,0 +1,155 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#faedcd">
+
+    <!-- Логотип Vision -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="-200dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_vision_confirmed" />
+
+    <!-- Иконка "Человек" -->
+    <ImageView
+        android:id="@+id/man"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/man" />
+
+    <!-- Текст "Человек" -->
+    <TextView
+        android:id="@+id/humanText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Человек"
+        android:textColor="#d4a373"
+        android:textSize="@dimen/_22ssp"
+        android:fontFamily="@font/sf_semibold"
+        android:layout_toRightOf="@id/man"
+        android:layout_alignBottom="@id/man"
+        android:layout_marginLeft="10dp"/>
+
+    <!-- Линия -->
+    <View
+        android:id="@+id/line"
+        android:layout_width="@dimen/_265sdp"
+        android:layout_height="@dimen/_7sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/humanText"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_line"/>
+
+
+    <!-- КНОПКИ В ВИДЕ КАРТИНОК -->
+    <LinearLayout
+        android:id="@+id/colorBlindnessButtons"
+        android:layout_below="@id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <!-- Дейтеранопия -->
+        <ImageButton
+            android:id="@+id/deuteranopiaButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/deuteranopia"
+            android:contentDescription="Дейтеранопия" />
+
+        <!-- Протанопия -->
+        <ImageButton
+            android:id="@+id/protanopiaButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/protanopia"
+            android:contentDescription="Протанопия"
+            android:layout_marginStart="20dp"/>
+
+        <!-- Тританопия -->
+        <ImageButton
+            android:id="@+id/tritanopiaButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/tritanopia"
+            android:contentDescription="Тританопия"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+
+    <!-- Лапка (иконка животных) -->
+    <ImageView
+        android:id="@+id/animal"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/colorBlindnessButtons"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/animal" />
+
+    <!-- Текст "Животные" -->
+    <TextView
+        android:id="@+id/animalsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Животные"
+        android:textColor="#d4a373"
+        android:textSize="@dimen/_22ssp"
+        android:fontFamily="@font/sf_semibold"
+        android:layout_toRightOf="@id/animal"
+        android:layout_alignBottom="@id/animal"
+        android:layout_marginLeft="10dp"/>
+
+    <!-- Линия -->
+    <View
+        android:id="@+id/line2"
+        android:layout_width="@dimen/_265sdp"
+        android:layout_height="@dimen/_7sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/animalsText"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_line"/>
+
+    <!-- Животные (собака и кошка) -->
+    <LinearLayout
+        android:id="@+id/animalsIcons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/dog"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog"
+            />
+
+        <ImageView
+            android:id="@+id/cat"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cat"
+            android:layout_marginStart="60dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

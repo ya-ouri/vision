@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- PreviewView для отображения видео с камеры -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+    <!-- GPUImageView для отображения отфильтрованного изображения -->
+    <jp.co.cyberagent.android.gpuimage.GPUImageView
+        android:id="@+id/gpuImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:visibility="visible" /> <!-- Например, установите прозрачность для проверки наложения -->
+    <!-- Кнопка-стрелка для возврата -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/arrow"
+
+        android:scaleType="fitCenter"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"/>
+
+</RelativeLayout>
