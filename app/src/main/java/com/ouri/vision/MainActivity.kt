@@ -49,13 +49,13 @@ class MainActivity : ComponentActivity() {
         backButton.setOnClickListener {
             val intent = Intent(this, ChoiceVisionActivity::class.java)
             startActivity(intent)
-            finish()// Закрываем текущую активность, если не нужен возврат
+            finish()
         }
         previewView = findViewById(R.id.previewView)
         gpuImageView = findViewById(R.id.gpuImageView)
         gpuImage = GPUImage(this)
 
-        // Получаем переданный фильтр из ChoiceVisionActivity
+        
         val filterType = intent.getStringExtra("FILTER_TYPE") ?: "normal"
         applyFilter(filterType)
 
@@ -142,7 +142,7 @@ class MainActivity : ComponentActivity() {
         val correctedBitmap = rotateBitmapIfNeeded(bitmap, imageProxy)
         gpuImage.setImage(correctedBitmap)
 
-        // ✅ Применяем ТОЛЬКО выбранный фильтр из ChoiceVisionActivity
+        
         selectedFilter?.let {
             gpuImage.setFilter(it)
         }
@@ -185,24 +185,24 @@ class MainActivity : ComponentActivity() {
             filterGroup.addFilter(contrastFilter)
             filterGroup.addFilter(brightnessFilter)
 
-            gpuImage.setFilter(filterGroup) // Устанавливаем сразу
-            return // Завершаем функцию, чтобы не устанавливать `selectedFilter`
+            gpuImage.setFilter(filterGroup) 
+            return 
         }
         if (filterType == "cat") {
             val catColorMatrix = GPUImageColorMatrixFilter(1.0f, floatArrayOf(
-                0.2f, 0.4f, 0.4f, 0.0f,  // Красный ослаблен, уходит в серый
-                0.0f, 0.7f, 0.3f, 0.0f,  // Чистый зелёный остаётся, но его вклад в жёлтый уменьшен
-                0.0f, 0.2f, 0.8f, 0.0f,  // Синий остаётся насыщенным
-                0.0f, 0.0f, 0.0f, 1.0f   // Альфа-канал
+                0.2f, 0.4f, 0.4f, 0.0f,  
+                0.0f, 0.7f, 0.3f, 0.0f, 
+                0.0f, 0.2f, 0.8f, 0.0f, 
+                0.0f, 0.0f, 0.0f, 1.0f  
             ))
-                //                0.2f, 0.4f, 0.4f, 0.0f,  // Красный ослаблен, уходит в серый
-            //                0.0f, 0.7f, 0.3f, 0.0f,  // Чистый зелёный остаётся, но его вклад в жёлтый уменьшен
-            //                0.0f, 0.2f, 0.8f, 0.0f,  // Синий остаётся насыщенным
-            //                0.0f, 0.0f, 0.0f, 1.0f   // Альфа-канал// Альфа-канал  // Альфа-канал// Альфа-канал
+                //                0.2f, 0.4f, 0.4f, 0.0f,  
+            //                0.0f, 0.7f, 0.3f, 0.0f,  
+            //                0.0f, 0.2f, 0.8f, 0.0f,  
+            //                0.0f, 0.0f, 0.0f, 1.0f   
 
-            val blurFilter = GPUImageGaussianBlurFilter(1f) // Размытость, как у кошки
-            val contrastFilter = GPUImageContrastFilter(0.5f) // Уменьшение контрастности
-            val brightnessFilter = GPUImageBrightnessFilter(-0.1f) // Снижение яркости
+            val blurFilter = GPUImageGaussianBlurFilter(1f)
+            val contrastFilter = GPUImageContrastFilter(0.5f)
+            val brightnessFilter = GPUImageBrightnessFilter(-0.1f) 
 
             val filterGroup = GPUImageFilterGroup()
             filterGroup.addFilter(catColorMatrix)
@@ -210,11 +210,11 @@ class MainActivity : ComponentActivity() {
             filterGroup.addFilter(contrastFilter)
             filterGroup.addFilter(brightnessFilter)
 
-            gpuImage.setFilter(filterGroup) // Устанавливаем фильтр
+            gpuImage.setFilter(filterGroup) 
             return
         }
 
-        // Для остальных фильтров
+        
         selectedFilter = when (filterType) {
             "deuteranopia" -> GPUImageColorMatrixFilter(
                 1.0f, floatArrayOf(
