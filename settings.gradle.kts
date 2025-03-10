@@ -12,6 +12,7 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
+
     repositories {
         google()
         mavenCentral()
@@ -23,6 +24,7 @@ dependencyResolutionManagement {
             url = uri("https://unity3ddist.jfrog.io/artifactory/unity-mediation-nvn-prod-local/")
         }
         maven { url = uri("https://maven.google.com/androidx/opengl/opengl/1.0.0/opengl-1.0.0.pom") }
+
 
     }
 }

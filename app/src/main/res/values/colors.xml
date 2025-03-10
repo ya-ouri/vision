@@ -5,4 +5,5 @@
     <color name="my_color">#faedcd</color>
     <color name="cool_black">#0e0e1a</color>
     <color name="rippleColor">#66FFFFFF</color>
+    <color name="semiTransparent">#80FFFFFF</color>
 </resources>

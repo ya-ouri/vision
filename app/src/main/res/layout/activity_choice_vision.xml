@@ -1,155 +1,457 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="#faedcd">
+    android:fillViewport="true"
+    android:background="#f9ffe3">
 
-    <!-- Логотип Vision -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="@dimen/_300sdp"
-        android:layout_height="@dimen/_150sdp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="-200dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo_vision_confirmed" />
-
-    <!-- Иконка "Человек" -->
-    <ImageView
-        android:id="@+id/man"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/imageView"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:src="@drawable/man" />
-
-    <!-- Текст "Человек" -->
-    <TextView
-        android:id="@+id/humanText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Человек"
-        android:textColor="#d4a373"
-        android:textSize="@dimen/_22ssp"
-        android:fontFamily="@font/sf_semibold"
-        android:layout_toRightOf="@id/man"
-        android:layout_alignBottom="@id/man"
-        android:layout_marginLeft="10dp"/>
-
-    <!-- Линия -->
-    <View
-        android:id="@+id/line"
-        android:layout_width="@dimen/_265sdp"
-        android:layout_height="@dimen/_7sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/humanText"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_line"/>
-
-
-    <!-- КНОПКИ В ВИДЕ КАРТИНОК -->
     <LinearLayout
-        android:id="@+id/colorBlindnessButtons"
-        android:layout_below="@id/line"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
 
-        <!-- Дейтеранопия -->
-        <ImageButton
-            android:id="@+id/deuteranopiaButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/deuteranopia"
-            android:contentDescription="Дейтеранопия" />
+        <!-- Логотип Vision -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_vision_non_confirm_3"
+            android:layout_marginBottom="10dp" />
 
-        <!-- Протанопия -->
-        <ImageButton
-            android:id="@+id/protanopiaButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/protanopia"
-            android:contentDescription="Протанопия"
-            android:layout_marginStart="20dp"/>
+        <!-- Блок "Человек" -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
 
-        <!-- Тританопия -->
-        <ImageButton
-            android:id="@+id/tritanopiaButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/tritanopia"
-            android:contentDescription="Тританопия"
-            android:layout_marginStart="20dp"/>
+            <ImageView
+                android:id="@+id/man"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/man"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/humanText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Человек"
+                android:textColor="#721c1c"
+                android:textSize="@dimen/_30ssp"
+                android:fontFamily="@font/sf_semibold"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <!-- Линия -->
+        <View
+            android:id="@+id/line"
+            android:layout_width="@dimen/_265sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:background="@drawable/rounded_line"
+            android:layout_gravity="center"
+
+            android:layout_marginBottom="20dp"/>
+
+        <!-- КНОПКИ С ФИЛЬТРАМИ -->
+        <LinearLayout
+            android:id="@+id/colorBlindnessButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Первый ряд: Дейтеранопия и Протанопия -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <!-- Карточка для Дейтеранопии -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/deuteranopiaButton"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    android:foreground="@drawable/ripple_effect"
+                    android:clickable="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:background="#721c1c">
+
+                        <ImageView
+                            android:id="@+id/deuteranopia"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/deuteranopia" />
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/green" />
+
+                        <TextView
+                            android:id="@+id/deuteranopiaText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/deuteranopia"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:background="@drawable/back_deu"
+                            android:text="Дейтеранопия"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#f9ffe3"
+                            android:textSize="17sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/sf_semibold" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Карточка для Протанопии -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/protanopiaButton"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    android:foreground="@drawable/ripple_effect"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#80FFFFFF">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:background="#721c1c">
+
+                        <ImageView
+                            android:id="@+id/protanopia"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/protanopia" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/red" />
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/protanopiaText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/protanopia"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="Протанопия"
+                            android:background="@drawable/back_deu"
+                            android:textColor="#f9ffe3"
+                            android:textSize="20sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/sf_semibold" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Второй ряд: Тританопия и Ахроматопсия -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+
+                <!-- Карточка для Тританопии -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/tritanopiaButton"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    android:foreground="@drawable/ripple_effect"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#80FFFFFF">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:background="#721c1c">
+
+                        <ImageView
+                            android:id="@+id/tritanopia"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_centerInParent="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/tritanopia" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/blue" />
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/tritanopiaText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tritanopia"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="Тританопия"
+                            android:textColor="#f9ffe3"
+                            android:textSize="20sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/sf_semibold"
+                            android:background="@drawable/back_deu"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Карточка для Ахроматопсии -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/achromatopsiaButton"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:cardBackgroundColor="#80FFFFFF"
+                    android:foreground="@drawable/ripple_effect"
+                    android:clickable="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="#721c1c">
+
+                <!-- Основная иконка Ахроматопсии (центрируется) -->
+                <ImageView
+                    android:id="@+id/achromatopsia"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/achromatopsia" />
+
+                <!-- Контейнер для трех глаз (в верхнем правом углу, с отступом влево) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <!-- Красный глаз -->
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/red"
+                        android:layout_marginEnd="5dp"/>
+
+                    <!-- Зеленый глаз -->
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/green"
+                        android:layout_marginEnd="5dp" />
+
+                    <!-- Синий глаз -->
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/blue" />
+
+            </LinearLayout>
+
+            <!-- Текст ниже иконки -->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/achromatopsia"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/back_deu"
+                android:gravity="center"
+                android:text="Ахроматопсия"
+                android:textColor="#f9ffe3"
+                android:textSize="18sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/sf_semibold" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
     </LinearLayout>
 
     <!-- Лапка (иконка животных) -->
-    <ImageView
-        android:id="@+id/animal"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/colorBlindnessButtons"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
-        android:src="@drawable/animal" />
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center_vertical"
+android:layout_marginTop="20dp">
 
-    <!-- Текст "Животные" -->
-    <TextView
-        android:id="@+id/animalsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Животные"
-        android:textColor="#d4a373"
-        android:textSize="@dimen/_22ssp"
-        android:fontFamily="@font/sf_semibold"
-        android:layout_toRightOf="@id/animal"
-        android:layout_alignBottom="@id/animal"
-        android:layout_marginLeft="10dp"/>
+<ImageView
+    android:id="@+id/animal"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@drawable/animal"
+    android:layout_marginLeft="20dp"/>
 
-    <!-- Линия -->
-    <View
-        android:id="@+id/line2"
-        android:layout_width="@dimen/_265sdp"
-        android:layout_height="@dimen/_7sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/animalsText"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_line"/>
+<TextView
+    android:id="@+id/animalsText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Животные"
+    android:textColor="#721c1c"
+    android:textSize="@dimen/_30ssp"
+    android:fontFamily="@font/sf_semibold"
+    android:layout_marginLeft="10dp"/>
+</LinearLayout>
 
-    <!-- Животные (собака и кошка) -->
-    <LinearLayout
-        android:id="@+id/animalsIcons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/line2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+    <!-- Вторая линия -->
+<View
+android:id="@+id/line2"
+android:layout_width="@dimen/_265sdp"
+android:layout_height="@dimen/_7sdp"
+android:background="@drawable/rounded_line"
+android:layout_gravity="center"
+android:layout_marginTop="10dp"
+android:layout_marginBottom="20dp"/>
 
-        <ImageView
-            android:id="@+id/dog"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/dog"
-            />
+    <!-- Карточки для животных -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
 
-        <ImageView
-            android:id="@+id/cat"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/cat"
-            android:layout_marginStart="60dp"/>
+            <!-- Карточка для Собаки -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dogButton"
+                android:layout_width="160dp"
+                android:layout_height="180dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                android:foreground="@drawable/ripple_effect"
+                android:clickable="true"
+                app:cardBackgroundColor="#80FFFFFF">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="#721c1c">
+
+                    <ImageView
+                        android:id="@+id/dog"
+                        android:layout_width="110dp"
+                        android:layout_height="90dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/dog" />
+
+
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/dogText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dog"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Собака"
+                        android:textColor="#f9ffe3"
+                        android:textSize="20sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/sf_semibold"
+                        android:background="@drawable/back_deu"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Карточка для Кошки -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/catButton"
+                android:layout_width="160dp"
+                android:layout_height="180dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#80FFFFFF"
+                android:foreground="@drawable/ripple_effect"
+                android:clickable="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="#721c1c">
+
+                    <!-- Основная иконка Ахроматопсии (центрируется) -->
+                    <ImageView
+                        android:id="@+id/cat"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/cat" />
+
+
+
+                    <!-- Текст ниже иконки -->
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cat"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/back_deu"
+                        android:gravity="center"
+                        android:text="Кошка"
+                        android:textColor="#f9ffe3"
+                        android:textSize="20sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/sf_semibold" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
     </LinearLayout>
-
-</RelativeLayout>
+    </androidx.core.widget.NestedScrollView>

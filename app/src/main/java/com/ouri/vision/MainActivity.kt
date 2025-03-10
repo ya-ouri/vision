@@ -19,7 +19,10 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import jp.co.cyberagent.android.gpuimage.GPUImage
 import jp.co.cyberagent.android.gpuimage.GPUImageView
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageBrightnessFilter
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorMatrixFilter
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageContrastFilter
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilterGroup
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageGaussianBlurFilter
 
 import java.io.ByteArrayOutputStream
@@ -56,7 +59,11 @@ class MainActivity : ComponentActivity() {
         val filterType = intent.getStringExtra("FILTER_TYPE") ?: "normal"
         applyFilter(filterType)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             startCamera()
         } else {
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
@@ -158,39 +165,96 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun applyFilter(filterType: String) {
+        if (filterType == "dog") {
+            val dogFilter = GPUImageColorMatrixFilter(
+                1.0f, floatArrayOf(
+                    0.45f, 0.55f, 0.00f, 0.0f,
+                    0.45f, 0.55f, 0.00f, 0.0f,
+                    0.00f, 0.00f, 1.00f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f
+                )
+            )
+
+            val blurFilter = GPUImageGaussianBlurFilter(0.5f)
+            val contrastFilter = GPUImageContrastFilter(0.8f)
+            val brightnessFilter = GPUImageBrightnessFilter(-0.1f)
+
+            val filterGroup = GPUImageFilterGroup()
+            filterGroup.addFilter(dogFilter)
+            filterGroup.addFilter(blurFilter)
+            filterGroup.addFilter(contrastFilter)
+            filterGroup.addFilter(brightnessFilter)
+
+            gpuImage.setFilter(filterGroup) // Устанавливаем сразу
+            return // Завершаем функцию, чтобы не устанавливать `selectedFilter`
+        }
+        if (filterType == "cat") {
+            val catColorMatrix = GPUImageColorMatrixFilter(1.0f, floatArrayOf(
+                0.2f, 0.4f, 0.4f, 0.0f,  // Красный ослаблен, уходит в серый
+                0.0f, 0.7f, 0.3f, 0.0f,  // Чистый зелёный остаётся, но его вклад в жёлтый уменьшен
+                0.0f, 0.2f, 0.8f, 0.0f,  // Синий остаётся насыщенным
+                0.0f, 0.0f, 0.0f, 1.0f   // Альфа-канал
+            ))
+                //                0.2f, 0.4f, 0.4f, 0.0f,  // Красный ослаблен, уходит в серый
+            //                0.0f, 0.7f, 0.3f, 0.0f,  // Чистый зелёный остаётся, но его вклад в жёлтый уменьшен
+            //                0.0f, 0.2f, 0.8f, 0.0f,  // Синий остаётся насыщенным
+            //                0.0f, 0.0f, 0.0f, 1.0f   // Альфа-канал// Альфа-канал  // Альфа-канал// Альфа-канал
+
+            val blurFilter = GPUImageGaussianBlurFilter(1f) // Размытость, как у кошки
+            val contrastFilter = GPUImageContrastFilter(0.5f) // Уменьшение контрастности
+            val brightnessFilter = GPUImageBrightnessFilter(-0.1f) // Снижение яркости
+
+            val filterGroup = GPUImageFilterGroup()
+            filterGroup.addFilter(catColorMatrix)
+            filterGroup.addFilter(blurFilter)
+            filterGroup.addFilter(contrastFilter)
+            filterGroup.addFilter(brightnessFilter)
+
+            gpuImage.setFilter(filterGroup) // Устанавливаем фильтр
+            return
+        }
+
+        // Для остальных фильтров
         selectedFilter = when (filterType) {
-            "deuteranopia" -> GPUImageColorMatrixFilter(1.0f, floatArrayOf(
-                0.38f, 0.68f, -0.10f, 0.0f,
-                0.30f, 0.52f,  0.08f, 0.0f,
-                -0.01f, 0.02f,  0.90f, 0.0f,
-                0.0f,   0.0f,   0.0f,   1.0f
-            ))
-                //                0.43f, 0.72f, -0.15f, 0.0f,  // Красный канал (R)
-            //                0.34f, 0.57f,  0.09f, 0.0f,  // Зеленый канал (G)
-            //                -0.02f, 0.03f,  1.00f, 0.0f, // Синий канал (B)
-            //                0.0f,   0.0f,   0.0f,   1.0f  // Альфа-канал
+            "deuteranopia" -> GPUImageColorMatrixFilter(
+                1.0f, floatArrayOf(
+                    0.38f, 0.68f, -0.10f, 0.0f,
+                    0.30f, 0.52f, 0.08f, 0.0f,
+                    -0.01f, 0.02f, 0.90f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f
+                )
+            )
 
+            "protanopia" -> GPUImageColorMatrixFilter(
+                1.0f, floatArrayOf(
+                    0.40f, 0.60f, -0.10f, 0.0f,
+                    0.34f, 0.50f, 0.16f, 0.0f,
+                    -0.02f, 0.02f, 0.90f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f
+                )
+            )
 
+            "tritanopia" -> GPUImageColorMatrixFilter(
+                1.0f, floatArrayOf(
+                    0.95f, -0.01f, 0.10f, 0.0f,
+                    -0.10f, 0.90f, 0.1f, 0.0f,
+                    0.00f, 1.3f, 0.275f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f
+                )
+            )
 
-            "protanopia" -> GPUImageColorMatrixFilter(1.0f, floatArrayOf(
-                0.40f, 0.60f, -0.10f, 0.0f,
-                0.34f, 0.50f,  0.16f, 0.0f,
-                -0.02f, 0.02f, 0.90f, 0.0f,
-                0.0f,   0.0f,  0.0f,  1.0f
-            ))
+            "achromatopsia" -> GPUImageColorMatrixFilter(
+                1.0f, floatArrayOf(
+                    0.33f, 0.33f, 0.33f, 0.0f,
+                    0.33f, 0.33f, 0.33f, 0.0f,
+                    0.33f, 0.33f, 0.33f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f
+                )
+            )
 
-            "tritanopia" -> GPUImageColorMatrixFilter(1.0f, floatArrayOf(
-                0.95f, 0.05f, 0.00f, 0.0f,
-                0.00f, 0.90f, 0.10f, 0.0f,
-                0.20f, 0.875f, 0.10f, 0.0f,
-                0.0f,  0.0f,  0.0f,  1.0f
-
-                //                0.950f, 0.050f, 0.000f, 0.0f,  // Красный → Почти не меняется
-                //                0.000f, 0.433f, 0.567f, 0.0f,  // Зелёный → Голубоватый
-                //                0.000f, 0.475f, 0.525f, 0.0f,  // Синий → Светло-зелёный/серый
-                //                0.0f, 0.0f, 0.0f, 1.0f
-            ))
             else -> null
         }
+
+        selectedFilter?.let { gpuImage.setFilter(it) }
     }
 }

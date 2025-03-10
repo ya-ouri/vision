@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#faedcd">
+    android:background="#f9ffe3">
 
     <!-- Логотип -->
     <ImageView
@@ -11,7 +11,7 @@
         android:layout_width="@dimen/_400sdp"
         android:layout_height="@dimen/_200sdp"
         android:layout_marginTop="-150dp"
-        android:src="@drawable/logo_vision_confirmed"
+        android:src="@drawable/logo_vision_non_confirm_3"
         android:layout_centerHorizontal="true"/>
 
     <!-- Описание -->
@@ -20,13 +20,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Это приложение имитирует зрение людей с глазными заболеваниями и разных животных, позволяя увидеть мир их глазами."
-        android:textColor="#d4a373"
+        android:textColor="#721c1c"
 
         android:gravity="center"
         android:layout_below="@id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textSize="@dimen/_19ssp"
+        android:textSize="@dimen/_20ssp"
         android:fontFamily="@font/sf_semibold"
         android:paddingHorizontal="24dp"/>
 
@@ -39,7 +39,7 @@
         android:textSize="24sp"
         android:padding="16dp"
         android:layout_marginTop="60dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#f9ffe3"
         android:background="@drawable/btn_ripple"
         android:layout_below="@id/textView"
         android:layout_centerHorizontal="true"/>

@@ -1,9 +1,11 @@
 package com.ouri.vision
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageButton
+import androidx.cardview.widget.CardView
 
 class ChoiceVisionActivity : AppCompatActivity() {
 
@@ -12,16 +14,26 @@ class ChoiceVisionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choice_vision)
 
-        findViewById<ImageButton>(R.id.protanopiaButton).setOnClickListener {
+
+        findViewById<CardView>(R.id.protanopiaButton).setOnClickListener {
             applyFilter("protanopia")
         }
 
-        findViewById<ImageButton>(R.id.deuteranopiaButton).setOnClickListener {
+        findViewById<CardView>(R.id.deuteranopiaButton).setOnClickListener {
             applyFilter("deuteranopia")
         }
 
-        findViewById<ImageButton>(R.id.tritanopiaButton).setOnClickListener {
+        findViewById<CardView>(R.id.tritanopiaButton).setOnClickListener {
             applyFilter("tritanopia")
+        }
+        findViewById<CardView>(R.id.achromatopsiaButton).setOnClickListener {
+            applyFilter("achromatopsia")
+        }
+        findViewById<CardView>(R.id.dogButton).setOnClickListener {
+            applyFilter("dog")
+        }
+        findViewById<CardView>(R.id.catButton).setOnClickListener {
+            applyFilter("cat")
         }
     }
 

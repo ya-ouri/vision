@@ -2,7 +2,7 @@
     android:shape="rectangle">
 
     <!-- Цвет линии -->
-    <solid android:color="#d4a373"/>
+    <solid android:color="#721c1c"/>
 
     <!-- Закругление краёв -->
     <corners android:radius="50dp"/>

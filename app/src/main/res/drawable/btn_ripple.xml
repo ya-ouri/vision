@@ -4,7 +4,7 @@
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="40dp"/> <!-- Радиус закругления -->
-            <solid android:color="#0e0e1a"/> <!-- Цвет кнопки -->
+            <solid android:color="#721c1c"/> <!-- Цвет кнопки -->
         </shape>
     </item>
 </ripple>

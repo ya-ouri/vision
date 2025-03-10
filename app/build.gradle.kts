@@ -60,9 +60,12 @@ dependencies {
     implementation ("androidx.camera:camera-view:1.0.0-alpha16")
     implementation("jp.co.cyberagent.android:gpuimage:2.1.0")
 
+
+
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.24")
     implementation ("com.intuit.ssp:ssp-android:1.1.1")
     implementation ("com.intuit.sdp:sdp-android:1.1.1")
+    implementation ("org.tensorflow:tensorflow-lite:2.9.0")
     //implementation 'androidx.appcompat:appcompat:1.1.0'
     //implementation 'androidx.core:core-ktx:1.3.0'
     //implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

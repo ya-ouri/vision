@@ -21,10 +21,10 @@ class StaticImageActivity : AppCompatActivity() {
         val grayscaleFilter = GPUImageColorMatrixFilter(
             1.0f,
             floatArrayOf(
-                0.95f, -0.01f, 0.10f, 0.0f,
-                -0.10f, 0.90f, 0.1f, 0.0f,
-                0.00f, 1.3f, 0.275f, 0.0f,
-                0.0f,  0.0f,  0.0f,  1.0f // Альфа-канал (без изменений)
+                0.33f, 0.33f, 0.33f, 0.0f,
+                0.33f, 0.33f, 0.33f, 0.0f,
+                0.33f, 0.33f, 0.33f, 0.0f,
+                0.0f,  0.0f,  0.0f,  1.0f
             )
         )
         gpuImageView.setFilter(grayscaleFilter)
